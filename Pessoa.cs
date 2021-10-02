@@ -1,4 +1,4 @@
-namespace Nova_pasta
+namespace CadastroPessoas
 {
     public abstract class Pessoa
     {
@@ -8,7 +8,7 @@ namespace Nova_pasta
 
         public bool enderecoComercial { get; set; }
         
-        public void PagarImposto(){
+        public void pagarImposto(){
               
         }
 

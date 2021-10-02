@@ -1,6 +1,6 @@
 using System;
 
-namespace Nova_pasta
+namespace CadastroPessoas
 {
     public class PessoaFisica : Pessoa
     {

@@ -1,10 +1,10 @@
-namespace Nova_pasta
+namespace CadastroPessoas
 {
     public class PessoaJuridica : Pessoa
     {
         public string cnpj { get; set; }
 
-        public string RazaoSocial { get; set; }
+        public string razaoSocial { get; set; }
            
     }
 }

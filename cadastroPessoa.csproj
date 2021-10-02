@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Nova_pasta</RootNamespace>
+    <RootNamespace>CadastroPessoas</RootNamespace>
   </PropertyGroup>
 
 </Project>
