@@ -20,13 +20,9 @@ namespace CadastroPessoas
 
             if (anos >= 18){
 
-                return true;
-                
-            } else{
-                
-                return false;
+                return true;   
             }
-
+            return false;
         }
     }
 }
