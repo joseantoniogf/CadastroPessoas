@@ -43,7 +43,6 @@ namespace CadastroPessoas
                 {
                     case "1":
                         PessoaFisica Pessoa01 = new PessoaFisica();
-
                         PessoaFisica Pessoa02 = new PessoaFisica();
                         Endereco end = new Endereco();
 
@@ -55,6 +54,7 @@ namespace CadastroPessoas
                         Pessoa02.endereco = end;
                         Pessoa02.cpf = "0123456789";
                         Pessoa02.nome = "Pessoa Fisica";
+                        Pessoa02.rendimento = 1500;
                         Pessoa02.dataNascimento = new DateTime(2001, 01, 01);
 
                         Console.WriteLine($@"Rua: {Pessoa02.endereco.logradouro}, {Pessoa02.endereco.numero}, {Pessoa02.endereco.complemento}");
@@ -67,8 +67,10 @@ namespace CadastroPessoas
 
                         }else
                         {
-                            Console.WriteLine($"Cadastro não autorizado! Não é permitido cadastrar menores de 18 anos.");
+                            Console.WriteLine($"Cadastro não autorizado!");
                         }
+                        Console.WriteLine(Pessoa01.PagarImposto(Pessoa02.rendimento));
+                        
                         break;
 
                     case "2":
@@ -84,6 +86,7 @@ namespace CadastroPessoas
                         novaPJuri.endereco = endJuri;
                         novaPJuri.cnpj = "12345670000189";
                         novaPJuri.razaoSocial = "Pessoa Juridica";
+                        novaPJuri.rendimento = 10000;
 
                         if (pJuri.ValidarCNPJ(novaPJuri.cnpj))
                         {
@@ -92,6 +95,9 @@ namespace CadastroPessoas
                         {
                            Console.WriteLine($"CNPJ Inválido");
                         }
+
+                        Console.WriteLine(pJuri.PagarImposto(novaPJuri.rendimento));
+                        
                         break;
 
                     case "0":
@@ -103,11 +109,11 @@ namespace CadastroPessoas
                         Console.WriteLine($"Opção inválida! Digite uma opção válida");
                         break;
                 }
-                
-            } while (opcao != "0");    
-                                                     
+
+            } while (opcao != "0");   
+
         }
-    
+
         static void BarraCarregamento(string textoCarregamento){
 
             Console.ResetColor();
