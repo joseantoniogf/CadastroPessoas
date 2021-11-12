@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace CadastroPessoas
@@ -7,6 +8,8 @@ namespace CadastroPessoas
     {
         static void Main(string[] args)
         {
+            List<PessoaFisica> listaPf = new List<PessoaFisica>();
+
             Console.Clear();    
             Console.ForegroundColor = ConsoleColor.Green;
             Console.BackgroundColor = ConsoleColor.Black;
@@ -31,10 +34,17 @@ namespace CadastroPessoas
 |             Escolha uma das opções abaixo              |
 |________________________________________________________|
 |                                                        |
-|                   1 - Pessoa Física                    |
-|                   2 - Pessoa Jurídica                  |
+|                     Pessoa Física                      |
+|               1 - Cadastrar Pessoa Física              |
+|               2 - Listar Pessoa Física                 |
+|               3 - Remover Pessoa Física                |
 |                                                        |
-|                   0 - Sair                             |
+|                    Pessoa Jurídica                     |
+|               4 - Cadastrar Pessoa Jurídica            |
+|               5 - Listar Pessoa Jurídica               |
+|               6 - Remover Pessoa Jurídica              |
+|                                                        |
+|               0 - Sair                                 |
 |________________________________________________________|
 ");
                 opcao = Console.ReadLine();
@@ -46,34 +56,80 @@ namespace CadastroPessoas
                         PessoaFisica Pessoa02 = new PessoaFisica();
                         Endereco end = new Endereco();
 
-                        end.logradouro = "Y";
-                        end.numero = 100;
-                        end.complemento = "Proximo a Padaria Z";
-                        end.enderecoComercial = false;
+                        Console.WriteLine($"Digite seu logradouro");
+                        end.logradouro = Console.ReadLine();
+                        
+                        Console.WriteLine($"Digite o numero");
+                        end.numero = int.Parse(Console.ReadLine());
+                        
+                        Console.WriteLine($"Digite o complemento (Aperte Enter se não houver");
+                        end.complemento = Console.ReadLine();
+
+                        Console.WriteLine($"Endereço comercial? S/N");
+                        string enderecoComercial = Console.ReadLine().ToUpper();
+
+                        if (enderecoComercial == "S")
+                        {
+                            end.enderecoComercial = true;
+                        }else
+                        {
+                            end.enderecoComercial = false;
+                        }
 
                         Pessoa02.endereco = end;
-                        Pessoa02.cpf = "0123456789";
-                        Pessoa02.nome = "Pessoa Fisica";
-                        Pessoa02.rendimento = 1500;
-                        Pessoa02.dataNascimento = new DateTime(2001, 01, 01);
 
-                        Console.WriteLine($@"Rua: {Pessoa02.endereco.logradouro}, {Pessoa02.endereco.numero}, {Pessoa02.endereco.complemento}");
+                        Console.WriteLine($"Digite seu CPF (somente numeros)");
+                        Pessoa02.cpf = Console.ReadLine();
+
+                        Console.WriteLine($"Digite seu nome");
+                        Pessoa02.nome = Console.ReadLine();
+                        
+                        Console.WriteLine($"Digite seu rendimento mensal");                      
+                        Pessoa02.rendimento = float.Parse(Console.ReadLine());
+                        
+                        Console.WriteLine($"Digite sua data de nascimento ex:AAAA/MM/DD");
+                        Pessoa02.dataNascimento = DateTime.Parse(Console.ReadLine());                      
 
                         bool idadeValida = Pessoa01.ValidarDataNascimento(Pessoa02.dataNascimento);
 
                         if (idadeValida == true)
                         {
                             Console.WriteLine($"Cadastro Aprovado!");
-
-                        }else
+                            listaPf.Add(Pessoa02);                        
+                            Console.WriteLine(Pessoa01.PagarImposto(Pessoa02.rendimento));
+                        }
+                        else
                         {
                             Console.WriteLine($"Cadastro não autorizado!");
                         }
-                        Console.WriteLine(Pessoa01.PagarImposto(Pessoa02.rendimento));
-                        
+                                              
                         break;
 
                     case "2":
+                            foreach (var item in listaPf)
+                            {
+                                Console.WriteLine($"{item.nome}, {item.cpf}, {item.endereco.logradouro}");                               
+                            }
+                        break;
+
+                    case "3":
+                            Console.WriteLine($"Digite o CPF que deseja remover");
+                            string cpfProcurado = Console.ReadLine();
+                            
+                            PessoaFisica pessoaEncontrada = listaPf.Find(item => item.cpf == cpfProcurado);
+                            if (pessoaEncontrada != null)
+                            {
+                                listaPf.Remove(pessoaEncontrada);
+                                Console.WriteLine($"Cadastro Removido");                                    
+                            }else
+                            {
+                                Console.WriteLine($"CPF não encontrado");
+                                
+                            }
+
+                        break;
+
+                    case "4":
                         PessoaJuridica pJuri = new PessoaJuridica();
                         PessoaJuridica novaPJuri = new PessoaJuridica();
                         Endereco endJuri = new Endereco();
